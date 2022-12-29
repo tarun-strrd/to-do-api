@@ -5,7 +5,7 @@ const todoSchema = mongoose.Schema({
         type:String,
         required:[true,'must provide name'],
         trim:true,
-        maxlength : [20,'len must be less tan 20 carecters']
+        maxlength : [20,'length must be less tan 20 charecters']
     },
     createdOn:{
         type:Date,
@@ -19,4 +19,4 @@ const todoSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Ttodo',todoSchema);
+module.exports = mongoose.model('Todo',todoSchema);
