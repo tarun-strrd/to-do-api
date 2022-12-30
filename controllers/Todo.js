@@ -70,11 +70,12 @@ const DeleteTodo= async (req,res)=>{
         const id=req.params.id;
         const todo = await Todo.findOneAndDelete({_id:id})
         if(!todo){
-            return res.status(404).json({message:`Not exists wit id:${id}`})
+            return res.status(403).json({message:`Not exists wit id:${id}`})
         }
         res.json({todo})
     } catch (err) {
         res.status(400).json({'message':err})
     }
 }
+
 module.exports={GetAllTodos,CreateTodo,GetTodo,UpdateTodo,DeleteTodo};

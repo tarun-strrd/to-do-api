@@ -6,7 +6,8 @@ const logger = require("morgan");
 const connectDB=require('./db/connect');
 const TodoRouter = require("./routes/Todo");
 //const usersRouter = require("./routes/users");
-
+const errorHandlerMiddleware = require('./middleware/error_handler');
+const notFoundMiddleware = require('./middleware/not-found');
 const app = express();
 
 app.use(logger("dev"));
@@ -15,11 +16,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/todo", TodoRouter);
+app.use(TodoRouter);
 //app.use("/users", usersRouter);
-app.get("/",(req,res)=>{
-    res.json({'message':'hello world'});
-})
+
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
+
+
 const port= process.env.port || 3000;
 const start = async () => {
   try{
